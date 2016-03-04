@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TestStore.Models.StatCart>
+
+@{
+    ViewBag.Title = "Ваши покупки"+ViewBag.user+":";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+<h2 style="margin-left:20px;">Список покупок</h2>
+<h3 style="margin-left:20px;">@Html.ActionLink("На главную", "Index","Home")</h3>
+
+
+<table >
+    <tr>
+        
+        <th align="center">
+           Дата
+        </th>
+        <th align="center">
+            Покупки
+        </th>
+        <th align="center">
+           Общая стоимость
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.StatDate)
+        </td>
+        <td align="center">
+            @foreach (var n in item.ProductNames)
+            {
+                <table class="smallTable">
+                    <tr class="smallTable">
+                        <td class="smallTable">@n.Name</td>
+                    </tr>
+                </table>
+            }
+        </td>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.StatTotalPrice)
+        </td>
+       
+    </tr>
+}
+
+</table>

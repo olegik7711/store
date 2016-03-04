@@ -1,0 +1,83 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    @*<link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css"/>*@
+
+    <script src="~/Scripts/jquery-1.12.0.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+    <script>
+  $(function() {
+    $( "#dialog" ).dialog();
+  });
+    </script>
+
+</head>
+<body>
+    <div id="header">
+       
+                    @{ Html.RenderAction("Summary", "Cart");}
+           
+        <div class="title">
+            <table>
+
+                <tr>
+                    <td>
+                        <img width="70" height="70" src="~/Images/flag.jpg" />
+                    </td>
+                    <td>
+                        <table>
+
+                            <tr>
+                                <td>
+                                    Гастроном - Сделано в СССР
+                                </td>
+                            </tr>
+                            <tr><td class="smollheader">Продуктовый магазин 1985 года</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+   
+  @if(TempData["message"]!=null)
+  {
+      <div id="dialog" title="Информация"><p>@TempData["message"] </p></div>
+     
+  }
+    <div class="categories">
+       @{ Html.RenderAction("Menu", "Nav");}
+    </div>
+    <div id="content">
+      
+            <table >
+                <tr>
+                    <td>
+                        @Html.ActionLink("Мои прошлые покупки", "UserBay", "Home") &nbsp &nbsp &nbsp
+                    @Html.ActionLink("Войти", "Login", "Account")&nbsp &nbsp &nbsp
+                        @Html.ActionLink("Регистрация", "Register", "Account")
+                        </td>
+                    <td align="right"><p>
+    <h4 style="margin-left:20em;">
+     
+          Найти: @Html.TextBox("search") &nbsp;
+        <input type="submit" value="Найти" />
+    </h4>
+</p></td>
+            </tr>
+        </table>
+    
+        @RenderBody()
+    </div>
+</body>
+</html>

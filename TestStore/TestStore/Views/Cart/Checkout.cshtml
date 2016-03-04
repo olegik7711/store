@@ -1,0 +1,37 @@
+﻿@model TestStore.Models.Cart
+
+
+@{
+    ViewBag.Title = "Тестовый магазин: Оформление заказа";
+}
+
+@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<h2>Оформить заказ</h2>
+<h3>Пожалуйста введите информацию, необходимую для оформления заказа!</h3>
+    @Html.ValidationSummary()
+    <table class="login">
+        <tr>
+<td class="logTD" align="left">Ф.И.О.:</td><td align="right">@Html.EditorFor(e => e.CustomerFIO)</td>
+            </tr>
+        <tr>
+<td class="logTD" align="left">Адрес:</td><td align="right">@Html.EditorFor(e => e.CustomerAddress)</td>
+            </tr>
+        <tr>
+<td align="left" class="logTD">Телефон:</td><td align="right">@Html.EditorFor(e => e.CustomerPhone)</td>
+            </tr>
+        <tr>
+<td align="left" class="logTD">EMail:</td><td>@Html.EditorFor(e => e.CustomerEmail)</td>
+</tr>
+
+        <tr>
+    <td colspan="2" align="right"><input type="submit" value="Оформить заказ" class="logbutton"/></td>
+            </tr>
+        </table>
+      
+    
+   <div class="actionButtons"> @Html.ActionLink("Отменить покупки", "Index", "Home")</div>
+}
+
+
+

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+    <div id="header">
+     
+        <div class="title">
+          Администрирование
+            </div>
+    </div>
+
+    @if (TempData["message"] != null)
+    {
+        <div>@TempData["message"]</div>
+    }
+    
+    <div >
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿@model TestStore.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Регистрация</h2>
+
+<p>@Html.ValidationSummary(true)</p>
+@using (Html.BeginForm())
+{@Html.AntiForgeryToken()
+    <table class="login">
+        <tr>
+    <td align="left" class="logTD">Введите логин:</td><td align="right">@Html.EditorFor(p=>p.Login)</td>
+   <td> @Html.ValidationMessageFor(p=>p.Login)</td>
+            </tr>
+        <tr>
+    <td align="left" class="logTD">Введите пароль:</td><td align="right">@Html.EditorFor(p=>p.Password)</td>
+    <td> @Html.ValidationMessageFor(p=>p.Password)</td>
+            </tr>
+        <tr>
+    <td align="left" class="logTD">Подтвердите пароль:</td><td align="right">@Html.EditorFor(p=>p.ConfirmPassword)</td>
+    <td>@Html.ValidationMessageFor(p=>p.ConfirmPassword)</td>
+            </tr>
+        <tr>
+    <td colspan="2" align="right"><input type="submit" value="Сохранить" class="logbutton"/></td>
+            </tr>
+        </table>
+        <div class="actionButtons">
+        @Html.ActionLink("Отменить", "Login")
+            </div>
+}
+

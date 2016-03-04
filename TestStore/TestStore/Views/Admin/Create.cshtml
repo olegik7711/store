@@ -1,0 +1,44 @@
+﻿@model TestStore.Models.Product
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+    <title>Добавить продукт</title>
+</head>
+<body>
+    <h1>Добавить новый продукт</h1>
+    <div> 
+        @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <table>
+                <tr>
+                    <td>@Html.Label("Категория товара"):</td><td>@Html.EditorFor(p => p.ProductCategory)</td>
+                </tr>
+                <tr>
+                <td>@Html.Label("Название"):</td><td>@Html.EditorFor(p => p.ProductName)</td>
+                    </tr>
+                <tr>
+                <td>@Html.Label("Описание товара"):</td><td>@Html.EditorFor(p => p.ProductDescription)</td>
+                    </tr>
+                <tr>
+                <td>@Html.Label("Колличество на складе"):</td><td>@Html.EditorFor(p => p.ProductQuantity)</td>
+                    </tr>
+                <tr>
+                <td>@Html.Label("Цена"):</td><td>@Html.EditorFor(p => p.ProductPrice)</td>
+                    </tr>
+                <tr>
+                <td>@Html.Label("Добавить изображение"):</td><td><input type="file" name="image" class="actionButtons"/></td>
+                    </tr>
+                <tr><td colspan="2" align="right"><input type="submit" value="Создать" class="actionButtons"/></td></tr>
+            </table>
+        }
+        <h3>@Html.ActionLink("К списку товаров", "Index", "Admin")</h3>
+    </div>
+</body>
+</html>

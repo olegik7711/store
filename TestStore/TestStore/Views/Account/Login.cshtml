@@ -1,0 +1,40 @@
+﻿@model TestStore.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Войти</h2>
+
+<p>@Html.ValidationSummary(true)</p>
+<div >
+
+    @Html.ActionLink("Регистрация", "Register")
+    </div>
+    @using (Html.BeginForm())
+    {@Html.AntiForgeryToken()
+        <table class="login">
+       
+        <tr>
+
+            <td align="left" class="logTD">Логин:</td>
+            <td align="right">@Html.EditorFor(p => p.Login) </td>
+            <td> @Html.ValidationMessageFor(p => p.Login)</td>
+        </tr>
+        <tr>
+            <td align="left" class="logTD">Пароль:</td>
+            <td align="right">@Html.EditorFor(p => p.Password)</td>
+            <td>@Html.ValidationMessageFor(p => p.Password)</td>
+        </tr>
+        <tr>
+            <td colspan="3" align="right">
+                <input type="submit" value="Войти" class="logbutton" />
+            </td>
+        </tr>
+    </table>
+    }
+    <div class="actionButtons">
+       
+        @Html.ActionLink("Отменить", "Logoff")
+        @Html.ActionLink("Сменить пароль", "ResetPassword")
+    </div>

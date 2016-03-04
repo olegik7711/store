@@ -1,0 +1,41 @@
+﻿@model TestStore.Models.Product
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+    <title>@Model.ProductName</title>
+</head>
+<body>
+    <h1 style="margin-left:20px;">@Model.ProductName</h1>
+    <table>
+        <tr>           
+            <td>Категория:</td><td>@Model.ProductCategory   </td>
+            </tr>
+        <tr>
+            <td>Нименование:</td><td>@Model.ProductName</td>
+            </tr>
+        <tr>
+            <td>Описание товара:</td><td>@Model.ProductDescription</td>
+            </tr>
+        <tr>
+        <td>Цена:</td><td>@Model.ProductPrice</td>
+            </tr>
+        <tr>
+        <td>Колличество: </td> <td>@Model.ProductQuantity</td>
+    </tr>
+</table>
+@if (Model.ImageData != null)
+{<p style="font-size:1.1em; color: #ff6a00; font-weight:bold; color:black;">Изображение:</p>
+    <div><img width="100" height="100"  src="@Url.Action("GetImage", "Admin", new { id = Model.ProductId })" /></div>
+}
+<div><h3>@Html.ActionLink("На главную", "Index", "Admin")</h3></div>
+</body>
+
+</html>

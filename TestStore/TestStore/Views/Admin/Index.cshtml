@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TestStore.Models.Product>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+    <title>Администрирование</title>
+</head>
+<body>
+    <div> 
+        <h1 style="margin:20px;">Список продуктов на складе</h1>
+        <table><tr><td>   <h2 style="margin:20px;">Необработанных покупателей: <span style="color:red;">@ViewBag.Pokupatel</span></h2></td>
+            <td>@Html.ActionLink("Перейти к списку","Index","AdminCart")</td>
+            </tr></table>
+        <h3 style="margin:20px;">@Html.ActionLink("Статистика покупок", "Statistic", "AdminCart")</h3>
+     <h3 style="margin:20px;"> @Html.ActionLink("Добавить новый продукт", "Create", "Admin")</h3>
+        @using (Html.BeginForm())
+        {
+            <p>
+                <h4 style="margin-left:20px;">
+                    Найти: @Html.TextBox("search") &nbsp;
+                    <input type="submit" value="Найти" />
+                </h4>
+            </p>
+        }
+        <table>
+            <tr>
+           <th align="center"> @Html.ActionLink("Категория", "Index", new { sort = ViewBag.CategorySortParm })</th>
+           <th align="center">@Html.ActionLink("Название", "Index", new { sort = ViewBag.NameSortParm })</th>
+            <th align="center">@Html.ActionLink("Колличество", "Index", new { sort = ViewBag.QuantityParm })</th>
+            <th align="center">@Html.ActionLink("Цена", "Index", new { sort = ViewBag.PriceSortParm }) </th>
+                <th colspan="3" align="center">Действия</th>
+            </tr>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td align="center">@p.ProductCategory</td>
+                    <td class="SsilkaAdmin" align="center">@Html.ActionLink(@p.ProductName, "Edit",
+                                           new { id = p.ProductId }, new {@class="actionButtons"})</td>
+                    <td align="center">@p.ProductQuantity</td>
+                    <td align="center">@p.ProductPrice</td>
+                    <td align="center">@using (Html.BeginForm("Details", "Admin"))
+                    {
+                        @Html.Hidden("id", p.ProductId)
+                        <input type="submit" value="Детали"  class="actionButtons" />
+                    }
+                    </td>
+                    
+                    <td align="center">
+                       
+                        @using (Html.BeginForm("Delete", "Admin"))
+                        {
+                            @Html.Hidden("id", p.ProductId)
+                            <input type="submit" value="Удалить" class="actionButtons" />
+                        }
+                    </td>
+                    
+
+                    
+                </tr>
+
+            }
+        </table>
+    </div>
+</body>
+</html>

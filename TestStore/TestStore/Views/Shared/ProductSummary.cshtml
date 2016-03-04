@@ -1,0 +1,37 @@
+﻿@model TestStore.Models.Product
+
+<div class="item">
+    <table>
+        
+        <tr>
+            <td width="10em">
+                <img width="200" height="150" src="@Url.Action("GetImage", "Admin", new {id=Model.ProductId})"/>
+            </td>      
+            <td>
+                <table><tr>
+   <td align="left"> <h3>@Model.ProductName</h3></td>
+                    </tr>
+                    <tr>
+                       
+                        <td align="justify" style="font-weight:600; color:darkslategrey;
+                            text-indent:20px; margin-left:15px;" > @Model.ProductDescription</td>
+</tr>
+                <tr>
+   <td align="right"> <h4>@Model.ProductPrice.ToString() руб.</h4></td>
+                    </tr>
+               <tr>
+                <td align="right">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.HiddenFor(x => x.ProductId)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" value="Купить" />
+                    }
+                </td>
+                   </tr>
+                </table>
+            </td>
+        </tr>
+        </table>
+</div>
+

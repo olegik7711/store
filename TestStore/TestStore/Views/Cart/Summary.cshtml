@@ -1,0 +1,25 @@
+﻿@model TestStore.Models.CartInfo
+   
+    @{ 
+        Layout = null;
+    }
+
+
+<div id="cart">
+    <table align="left">
+        <tr>
+            <td ><img  width="50px" height="40px" src="~/Images/cart.png"/></td>
+            <td>
+    <span >
+        <b>Ваша корзина @Model.CartUser</b><br/>
+       <b> @Model.Lines.Sum(x=>x.Quanttity) кг.
+        @Model.CoputeTotalValue().ToString() руб.</b>
+    </span>
+</td>
+            <td >
+    @Html.ActionLink("КУПИТЬ", "Index", "Cart", new { returnUrl= Request.Url.PathAndQuery},null)              
+                </td>
+            </tr>     
+        </table>
+
+</div>

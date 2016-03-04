@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TestStore.Models.StatCart>
+
+@{
+    ViewBag.Title = "Статистика";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+<h2 style="margin-left:20px;">Список всех покупателей</h2>
+<h3  style="margin-left:20px;">@Html.ActionLink("Список новых покупателей","Index")</h3>
+<h3 style="margin-left:20px;">@Html.ActionLink("Список продуктов", "Index","Admin")</h3>
+@using (Html.BeginForm())
+{
+    <p>
+        <h4 style="margin-left:20px;">
+            Найти: @Html.TextBox("search") &nbsp;
+            <input type="submit" value="Найти" />
+        </h4>
+    </p>
+}
+<table >
+    <tr>
+        <th align="center">@Html.ActionLink("UserName", "Statistic", new { sort = ViewBag.UserSort })</th>
+        <th align="center">@Html.ActionLink("Дата заказа", "Statistic", new { sort = ViewBag.DateSort })</th>
+        <th align="center">Ф.И.О. покупателя</th>
+        <th align="center">Адрес покупателя</th>
+        <th align="center">Email покупателя</th>
+        <th align="center">Телефон покупателя</th>
+        <th align="center">Покупки</th>
+        <th align="center">@Html.ActionLink("Общая стоимость", "Statistic", new { sort = ViewBag.PriceSort })</th>
+        <th align="center">Удалить запись</th>
+        
+    </tr>
+
+    @foreach (var p in Model)
+    {
+        <tr>
+          <td align="center">@p.StatUserName</td>
+            <td align="center">@p.StatDate</td>
+            <td align="center">@p.StatCustomerFIO</td>
+            <td align="center">@p.StatCustomerAddress</td>
+            <td align="center">@p.StatCustomerEmail</td>
+            <td align="center">@p.StatCustomerPhone</td>
+            <td>
+                @foreach (var t in p.ProductNames)
+                {
+                    <table class="smallTable">
+                        <tr class="smallTable">
+                            <td class="smallTable">@t.Name</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+            <td align="center">@p.StatTotalPrice</td>
+            <td align="center">
+                @using (Html.BeginForm("StatisticDelete", "AdminCart"))
+                {
+                    @Html.Hidden("id", p.StatCartId)
+                    <input type="submit" value="Удалить" class="actionButtons"/>
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+  

@@ -1,0 +1,63 @@
+﻿@model TestStore.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Test Store:Ваша корзина";
+}
+
+<h2>Ваша корзина</h2>
+<table width="90%" align="center">
+    <thead>
+        <tr>
+            <th align="center">Колличество</th>
+            <th align="left">Товар</th>
+            <th align="right">Цена</th>
+            <th align="right">Сумма</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+               
+                <td align="center"><table><tr><td>
+    @using (Html.BeginForm("RemoveItemFromCart", "Cart"))
+    {
+        @Html.Hidden("ProductId", line.Product.ProductId)
+        @Html.HiddenFor(x => x.ReturnUrl)
+        <input class="actionButtons" type="submit" value="-" />
+    }
+</td><td> @line.Quanttity</td>
+                    <td>
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.Hidden("ProductId",line.Product.ProductId)
+                        @Html.HiddenFor(x=>x.ReturnUrl)
+                        <input class="actionButtons" type="submit" value="+" />
+                    }
+                     </td></tr></table>                
+                <td align="left">@line.Product.ProductName</td>
+                <td align="right">@line.Product.ProductPrice</td>
+                <td align="right">@((line.Quanttity*line.Product.ProductPrice).ToString()) руб.</td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("ProductId", line.Product.ProductId)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="actionButtons" type="submit" value="Удалить"/>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" align="right">Итого:</td>
+            <td align="right">@Model.Cart.CoputeTotalValue().ToString() руб.</td>
+        </tr>
+    </tfoot>
+</table>
+<p align="center" class="actionButtons">
+    <a href="@Model.ReturnUrl">Продолжить покупки</a>
+    @Html.ActionLink("Оформить заказ","Checkout")
+</p>
+

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TestStore.Models.Cart>
+
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+<h2 style="margin:20px;">Покупатели</h2>
+<h3 style="margin:20px;">@Html.ActionLink("Статистика покупок", "Statistic")</h3>
+<h3 style="margin-left:20px;">@Html.ActionLink("Список продуктов", "Index", "Admin")</h3>
+<table>
+    <tr>
+        <th align="center">UserName</th>
+        <th align="center">Дата заказа</th>
+        <th align="center">Ф.И.О. покупателя</th>
+        <th align="center">Адрес покупателя</th>
+        <th align="center">Email покупателя</th>
+        <th align="center">Телефон покупателя</th>
+        <th align="center">Покупки</th>
+        <th align="center">Общая стоимость</th>
+        <th align="center">Действия</th>
+    </tr>
+    
+        @foreach (var p in Model)
+        {
+    <tr>
+
+        <td align="center">@p.CartLogin</td>
+        <td align="center">@p.Date</td>
+        <td align="center">@p.CustomerFIO</td>
+        <td align="center">@p.CustomerAddress</td>
+        <td align="center">@p.CustomerEmail</td>
+        <td align="center">@p.CustomerPhone</td>
+
+        <td>
+            @foreach (var t in p.CartProductos)
+                {
+                <table class="smallTable">
+                    <tr class="smallTable">
+                        <td class="smallTable">@t.ProductName</td>
+                        <td class="smallTable">@t.ProductQuantity</td>
+                        <td class="smallTable">@t.SubPrice</td>
+                    </tr>
+                </table>
+            }
+        </td>
+        <td align="center">@p.TotalPrice</td>
+        <td align="center">
+            @using (Html.BeginForm("Delete", "AdminCart"))
+                {
+                @Html.Hidden("Id", p.CartId)
+                <input type="submit" value="Оформить" class="actionButtons" />
+            }
+        </td>
+    </tr>
+        }
+    </table>

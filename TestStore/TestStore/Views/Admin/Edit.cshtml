@@ -1,0 +1,60 @@
+﻿@model TestStore.Models.Product
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/ForAdmin.css")" rel="stylesheet" type="text/css" />
+    <title>Редактировать</title>
+</head>
+<body>
+    <h1 style="margin:20px;">Редактировать продукт</h1>
+    <div> 
+                @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(p => p.ProductId)
+                    <table>
+                        <tr>
+                            <td>@Html.Label("Категория товара"):</td>
+                            <td>@Html.EditorFor(p => p.ProductCategory)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Название"):</td>
+                            <td>@Html.EditorFor(p => p.ProductName)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Описание товара"):</td>
+                            <td>@Html.EditorFor(p => p.ProductDescription)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Колличество на складе"):</td>
+                            <td>@Html.EditorFor(p => p.ProductQuantity)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Цена"):</td>
+                            <td>@Html.EditorFor(p => p.ProductPrice)</td>
+                        </tr>
+                        </table>
+                        <div>
+                            @if (Model.ImageData == null)
+                            {
+                                @:None
+            }
+                            else
+                            {
+                                <div style="padding:5px;"><img width="100" height="100" class="forImg" src="@Url.Action("GetImage", "Admin", new { id = Model.ProductId })" /></div>
+                            }
+                            <div class="login">
+                                <span style="font-size:1.1em; color: #ff6a00; font-weight:bold; color:black;">Заменить изображение:</span><input type="file" name="image" class="actionButtons" />
+                            </div>
+                            <input type="submit" value="Сохранить" class="actionButtons" />
+                            <h3> @Html.ActionLink("Отменить и вернуться на главную", "Index", "Admin")</h3>
+                        </div>
+                        }
+</div>
+</body>
+</html>

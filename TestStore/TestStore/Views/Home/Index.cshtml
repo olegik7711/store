@@ -1,0 +1,20 @@
+﻿@model TestStore.Models.SsilkaNaStranice
+    @using TestStore.HtmlHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+   
+  
+      
+
+    @foreach (var item in Model.Products) {
+        Html.RenderPartial("ProductSummary", item);
+    }
+
+          
+       
+    
+   
+    <div class="pager">@Html.PageLinks(Model.Info, x => Url.Action("Index", new { page = x, category=Model.CurrentCategory })) </div>
+
