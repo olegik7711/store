@@ -1,0 +1,21 @@
+﻿body,td,th {font-family: Georgia;
+	
+	font-weight: bold;
+	font-size: 12px;
+	color: #0B0000;
+	line-height: 23px;
+	
+   }
+body{background-color:azure}
+a{color:blue;}
+a:visited{color:purple;}
+a:active{color:red;}
+td,th{margin-left:1em; padding:2px;  }
+th{background-color:lightblue;}
+table{border: 1px solid gray; border-radius:2px; background-color:white;}
+
+.buttonSt{
+font-weight:bold; font-size:12px; text-decoration:none; 
+ }
+.thForBtn{border:0px;}
+.forImg{border:1px solid gray; border-radius:10px 0px;}

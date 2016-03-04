@@ -1,0 +1,12 @@
+﻿table{border: 2px solid #ff6a00; margin:10px; font-family:Arial; font-size:12px;}
+td{margin:0; padding:2px;font-family:Arial; font-size:12px;color:black; font-weight:bold; border:1px solid #ff6a00; }
+th{background-color:#ff6a00; font-family:Arial; font-size:14px;color:black; margin:0; padding:5px;}
+.smallTable{border:1px solid dodgerblue;font-family:Arial; font-size:12px; margin:1px; width:100%;}
+
+.actionButtons a, input.actionButtons
+{
+    font: 1em Arial; font-weight:bold; color: black; margin:0.5em;
+    text-decoration:none; padding:0.15em 1.5em 0.2em 1.5em;
+    background-color:#ff6a00; border:1px solid dodgerblue; 
+   cursor:pointer;
+}
